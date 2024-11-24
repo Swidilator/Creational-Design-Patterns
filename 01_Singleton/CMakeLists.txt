@@ -9,3 +9,6 @@ add_executable(01_basic_example 01_basic_example/main.cpp
 add_executable(02_logger 02_logger/main.cpp
         02_logger/Logger.cpp
         02_logger/Logger.h)
+add_executable(03_lazy_singleton 03_lazy_singleton/main.cpp
+        03_lazy_singleton/Logger.cpp
+        03_lazy_singleton/Logger.h)
