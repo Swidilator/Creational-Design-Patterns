@@ -5,12 +5,12 @@
 #include "Logger.h"
 
 void OpenConnection() {
-    Logger lg;
+    Logger &lg = Logger::Instance();
     lg.WriteLog("Attempting to open a connection");
 }
 
 int main() {
-    Logger lg;
+    Logger &lg = Logger::Instance();
     lg.SetTag("192.168.1.123");
     lg.WriteLog("Application has started");
     OpenConnection();

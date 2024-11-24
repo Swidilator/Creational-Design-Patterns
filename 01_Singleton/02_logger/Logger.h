@@ -10,8 +10,16 @@ class Logger {
     FILE *m_pStream;
     std::string m_Tag;
 
-public:
     Logger();
+
+    static Logger m_Instance;
+
+public:
+    static Logger &Instance();
+
+    Logger(const Logger &) = delete;
+
+    Logger &operator=(const Logger &) = delete;
 
     ~Logger();
 

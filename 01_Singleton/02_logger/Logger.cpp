@@ -4,6 +4,8 @@
 
 #include "Logger.h"
 
+Logger Logger::m_Instance;
+
 Logger::Logger() {
     m_pStream = fopen("applog.txt", "w");
 }
@@ -19,4 +21,8 @@ void Logger::WriteLog(const char *pMessage) {
 
 void Logger::SetTag(const char *pTag) {
     m_Tag = pTag;
+}
+
+Logger &Logger::Instance() {
+    return m_Instance;
 }
