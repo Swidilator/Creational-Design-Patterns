@@ -6,13 +6,17 @@
 
 #include <iostream>
 #include <source_location>
-
+#include <cstdlib>
 
 Logger *Logger::m_pInstance;
 
 Logger::Logger() {
     std::cout << std::source_location::current().function_name() << std::endl;
     m_pStream = fopen("applog.txt", "w");
+    //beware static-initialisation fiasco
+    std::atexit([]() {
+        delete m_pInstance;
+    });
 }
 
 Logger::~Logger() {
@@ -32,6 +36,7 @@ void Logger::SetTag(const char *pTag) {
 Logger &Logger::Instance() {
     if (m_pInstance == nullptr) {
         m_pInstance = new Logger{};
+        //m_pInstance.reset(new Logger{});
     }
     return *m_pInstance;
 }

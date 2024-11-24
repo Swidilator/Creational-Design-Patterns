@@ -4,24 +4,32 @@
 
 #pragma once
 #include <cstdio>
+#include <memory>
 #include <string>
 
 class Logger {
+    struct Deleter {
+        void operator()(Logger *p) {
+            delete p;
+        }
+    };
+
     FILE *m_pStream;
     std::string m_Tag;
 
     Logger();
 
     static Logger *m_pInstance;
+    //inline static std::unique_ptr<Logger, Deleter> m_pInstance{};
+
+    ~Logger();
 
 public:
-    static Logger &Instance();
-
     Logger(const Logger &) = delete;
 
     Logger &operator=(const Logger &) = delete;
 
-    ~Logger();
+    static Logger &Instance();
 
     void WriteLog(const char *pMessage);
 
