@@ -38,7 +38,11 @@ Logger& Logger::Instance() {
     if (m_pInstance == nullptr) {
         m_Mtx.lock();
         if (m_pInstance == nullptr) {
-            m_pInstance = new Logger{};
+            //m_pInstance = new Logger{};
+            // Non-thread-safe demonstration of above line of code.
+            void *p=operator new(sizeof(Logger));
+            m_pInstance = static_cast<Logger*>(p);
+            new(p) Logger{};
         }
         m_Mtx.unlock();
     }
