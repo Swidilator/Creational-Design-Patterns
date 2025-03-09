@@ -19,7 +19,7 @@ class Logger {
 
     Logger();
 
-    static Logger *m_pInstance;
+    inline static Logger *m_pInstance;
     //inline static std::unique_ptr<Logger, Deleter> m_pInstance{};
 
     ~Logger();
