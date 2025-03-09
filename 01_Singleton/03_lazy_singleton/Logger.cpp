@@ -14,10 +14,6 @@
 Logger::Logger() {
     std::cout << std::source_location::current().function_name() << std::endl;
     m_pStream = fopen("applog.txt", "w");
-    //beware static-initialisation fiasco
-    std::atexit([]() {
-        delete m_pInstance;
-    });
 }
 
 Logger::~Logger() {
@@ -32,34 +28,4 @@ void Logger::WriteLog(const char* pMessage) const {
 
 void Logger::SetTag(const char* pTag) {
     m_Tag = pTag;
-}
-
-
-std::once_flag flag;
-Logger& Logger::Instance() {
-    // Double-checked locking pattern
-
-    // if (m_pInstance == nullptr) {
-    //     m_Mtx.lock();
-    //     if (m_pInstance == nullptr) {
-    //         //m_pInstance = new Logger{};
-    //         // Non-thread-safe demonstration of above line of code.
-    //         void *p=operator new(sizeof(Logger));
-    //         m_pInstance = static_cast<Logger*>(p);
-    //         new(p) Logger{};
-    //     }
-    //     m_Mtx.unlock();
-    // }
-
-    // Meyer's Singleton (thread-safe from C++11 onwards)
-    // static Logger instance;
-    //
-    // return instance;
-
-    // call_once, in this case Meyer's Singleton is still better
-    std::call_once(flag, []() {
-        m_pInstance = new Logger{};
-    });
-
-    return *m_pInstance;
 }

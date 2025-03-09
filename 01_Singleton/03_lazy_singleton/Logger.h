@@ -7,22 +7,15 @@
 #include <memory>
 #include <string>
 
-class Logger {
-    struct Deleter {
-        void operator()(Logger* p) {
-            delete p;
-        }
-    };
+#include "BaseSingleton.h"
 
-    inline static std::mutex m_Mtx;
+class Logger : public BaseSingleton<Logger> {
+    friend BaseSingleton<Logger>;
 
     FILE* m_pStream;
     std::string m_Tag;
 
     Logger();
-
-    inline static Logger* m_pInstance;
-    //inline static std::unique_ptr<Logger, Deleter> m_pInstance{};
 
     ~Logger();
 
@@ -30,8 +23,6 @@ public:
     Logger(const Logger&) = delete;
 
     Logger& operator=(const Logger&) = delete;
-
-    static Logger& Instance();
 
     void WriteLog(const char* pMessage) const;
 

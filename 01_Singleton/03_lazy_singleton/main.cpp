@@ -4,7 +4,20 @@
 //
 #include <thread>
 
+#include "BaseSingleton.h"
 #include "Logger.h"
+
+
+class GameManager : public BaseSingleton<GameManager> {
+    MAKE_SINGLETON(GameManager);
+
+public:
+    void LoadAssets() {
+    }
+
+    void Run() {
+    }
+};
 
 void OpenConnection() {
     Logger& lg = Logger::Instance();
@@ -12,6 +25,10 @@ void OpenConnection() {
 }
 
 int main() {
+    GameManager& gm = GameManager::Instance();
+    gm.LoadAssets();
+
+
     std::thread t1{
         []() {
             Logger& lg = Logger::Instance();
