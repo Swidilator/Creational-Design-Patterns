@@ -7,6 +7,7 @@
 #include <iostream>
 #include <source_location>
 #include <cstdlib>
+#include <mutex>
 
 //Logger *Logger::m_pInstance;
 
@@ -33,6 +34,8 @@ void Logger::SetTag(const char* pTag) {
     m_Tag = pTag;
 }
 
+
+std::once_flag flag;
 Logger& Logger::Instance() {
     // Double-checked locking pattern
 
@@ -49,7 +52,14 @@ Logger& Logger::Instance() {
     // }
 
     // Meyer's Singleton (thread-safe from C++11 onwards)
-    static Logger instance;
+    // static Logger instance;
+    //
+    // return instance;
 
-    return instance;
+    // call_once, in this case Meyer's Singleton is still better
+    std::call_once(flag, []() {
+        m_pInstance = new Logger{};
+    });
+
+    return *m_pInstance;
 }
