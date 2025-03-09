@@ -9,29 +9,31 @@
 
 class Logger {
     struct Deleter {
-        void operator()(Logger *p) {
+        void operator()(Logger* p) {
             delete p;
         }
     };
 
-    FILE *m_pStream;
+    inline static std::mutex m_Mtx;
+
+    FILE* m_pStream;
     std::string m_Tag;
 
     Logger();
 
-    inline static Logger *m_pInstance;
+    inline static Logger* m_pInstance;
     //inline static std::unique_ptr<Logger, Deleter> m_pInstance{};
 
     ~Logger();
 
 public:
-    Logger(const Logger &) = delete;
+    Logger(const Logger&) = delete;
 
-    Logger &operator=(const Logger &) = delete;
+    Logger& operator=(const Logger&) = delete;
 
-    static Logger &Instance();
+    static Logger& Instance();
 
-    void WriteLog(const char *pMessage);
+    void WriteLog(const char* pMessage) const;
 
-    void SetTag(const char *pTag);
+    void SetTag(const char* pTag);
 };

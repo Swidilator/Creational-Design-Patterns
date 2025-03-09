@@ -24,19 +24,23 @@ Logger::~Logger() {
     fclose(m_pStream);
 }
 
-void Logger::WriteLog(const char *pMessage) {
+void Logger::WriteLog(const char* pMessage) const {
     fprintf(m_pStream, "[%s] %s\n", m_Tag.c_str(), pMessage);
     fflush(m_pStream);
 }
 
-void Logger::SetTag(const char *pTag) {
+void Logger::SetTag(const char* pTag) {
     m_Tag = pTag;
 }
 
-Logger &Logger::Instance() {
+Logger& Logger::Instance() {
+    // Double-checked locking pattern
     if (m_pInstance == nullptr) {
-        m_pInstance = new Logger{};
-        //m_pInstance.reset(new Logger{});
+        m_Mtx.lock();
+        if (m_pInstance == nullptr) {
+            m_pInstance = new Logger{};
+        }
+        m_Mtx.unlock();
     }
     return *m_pInstance;
 }
