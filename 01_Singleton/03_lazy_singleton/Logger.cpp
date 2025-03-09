@@ -35,16 +35,21 @@ void Logger::SetTag(const char* pTag) {
 
 Logger& Logger::Instance() {
     // Double-checked locking pattern
-    if (m_pInstance == nullptr) {
-        m_Mtx.lock();
-        if (m_pInstance == nullptr) {
-            //m_pInstance = new Logger{};
-            // Non-thread-safe demonstration of above line of code.
-            void *p=operator new(sizeof(Logger));
-            m_pInstance = static_cast<Logger*>(p);
-            new(p) Logger{};
-        }
-        m_Mtx.unlock();
-    }
-    return *m_pInstance;
+
+    // if (m_pInstance == nullptr) {
+    //     m_Mtx.lock();
+    //     if (m_pInstance == nullptr) {
+    //         //m_pInstance = new Logger{};
+    //         // Non-thread-safe demonstration of above line of code.
+    //         void *p=operator new(sizeof(Logger));
+    //         m_pInstance = static_cast<Logger*>(p);
+    //         new(p) Logger{};
+    //     }
+    //     m_Mtx.unlock();
+    // }
+
+    // Meyer's Singleton (thread-safe from C++11 onwards)
+    static Logger instance;
+
+    return instance;
 }
