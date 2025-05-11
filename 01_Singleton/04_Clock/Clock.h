@@ -5,20 +5,21 @@
 #pragma once
 #include <string>
 
-
+// Monostate pattern, enforces singularity through behaviour, using structure
 class Clock {
 
-    int m_Hour;
-    int m_Minute;
-    int m_Second;
+    inline static int m_Hour;
+    inline static int m_Minute;
+    inline static int m_Second;
 
-    void CurrentTime();
-public:
+    static void CurrentTime();
     Clock();
-    int GetHour();
-    int GetMinute();
-    int GetSecond();
 
-    std::string GetTimeString();
+public:
+    static int GetHour();
+    static int GetMinute();
+    static int GetSecond();
+
+    static std::string GetTimeString();
 
 };

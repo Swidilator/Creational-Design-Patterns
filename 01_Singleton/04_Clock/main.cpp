@@ -9,6 +9,6 @@
 #include "Clock.h"
 
 int main() {
-    Clock clk;
-    std::cout << clk.GetTimeString() << std::endl;
+    //Clock clk;
+    std::cout << Clock::GetTimeString() << std::endl;
 }
