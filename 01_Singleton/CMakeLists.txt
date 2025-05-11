@@ -29,3 +29,13 @@ add_executable(05_testing_issues 05_testing_issues/main.cpp
         05_testing_issues/Printer.h
         05_testing_issues/Printer.cpp
 )
+
+add_executable(06_registry 06_registry/main.cpp
+        06_registry/LocalPrinter.cpp
+        06_registry/LocalPrinter.h
+        06_registry/Printer.h
+        06_registry/PrinterProvider.cpp
+        06_registry/PrinterProvider.h
+        06_registry/PDFPrinter.cpp
+        06_registry/PDFPrinter.h
+)
