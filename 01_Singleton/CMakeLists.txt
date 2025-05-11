@@ -22,3 +22,10 @@ add_executable(03_lazy_singleton 03_lazy_singleton/main.cpp
 add_executable(04_clock 04_clock/main.cpp
         04_clock/Clock.cpp
         04_clock/Clock.h)
+
+add_executable(05_testing_issues 05_testing_issues/main.cpp
+        05_testing_issues/LocalPrinter.cpp
+        05_testing_issues/LocalPrinter.h
+        05_testing_issues/Printer.h
+        05_testing_issues/Printer.cpp
+)
