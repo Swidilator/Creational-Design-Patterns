@@ -19,6 +19,6 @@ add_executable(03_lazy_singleton 03_lazy_singleton/main.cpp
         03_lazy_singleton/Logger.h
         03_lazy_singleton/BaseSingleton.h)
 
-add_executable(04_clock 04_Clock/main.cpp
-        04_Clock/Clock.cpp
-        04_Clock/Clock.h)
+add_executable(04_clock 04_clock/main.cpp
+        04_clock/Clock.cpp
+        04_clock/Clock.h)
