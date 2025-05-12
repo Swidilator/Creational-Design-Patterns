@@ -39,3 +39,13 @@ add_executable(06_registry 06_registry/main.cpp
         06_registry/PDFPrinter.cpp
         06_registry/PDFPrinter.h
 )
+
+add_executable(07_lazy_registry 07_lazy_registry/main.cpp
+        07_lazy_registry/LocalPrinter.cpp
+        07_lazy_registry/LocalPrinter.h
+        07_lazy_registry/Printer.h
+        07_lazy_registry/PrinterProvider.cpp
+        07_lazy_registry/PrinterProvider.h
+        07_lazy_registry/PDFPrinter.cpp
+        07_lazy_registry/PDFPrinter.h
+)
